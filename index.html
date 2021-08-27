@@ -561,7 +561,7 @@ digraph {
                 if (newInput != lastInput) {
                     lastInput = newInput;
                     if (window.localStorage) {
-                        localStorage.setItem("deciduous-content", newInput);
+                        localStorage.setItem("planner-content", newInput);
                     }
                     function updateTextArea() {
                         types["approaches"] = "approaches";
@@ -643,7 +643,7 @@ digraph {
             inputSource.addEventListener("keydown", syncScroll, false);
             inputSource.addEventListener("keyup", syncScroll, false);
             if (window.localStorage) {
-                const content = localStorage.getItem("deciduous-content");
+                const content = localStorage.getItem("planner-content");
                 if (content !== null && content !== "") {
                     inputSource.value = content;
                 }
@@ -658,7 +658,7 @@ digraph {
             const leftPane = document.getElementById("leftPane");
             let currentPercentage = 40;
             if (window.localStorage) {
-                currentPercentage = localStorage.getItem("deciduous-divider") || 40;
+                currentPercentage = localStorage.getItem("planner-divider") || 40;
             }
             function updateDivider(percent) {
                 dragger.style.left = percent + "%";
@@ -675,7 +675,7 @@ digraph {
                 document.body.removeEventListener("mousemove", mouseMove);
                 document.body.removeEventListener("mouseup", mouseUp);
                 if (window.localStorage) {
-                    localStorage.setItem("deciduous-divider", currentPercentage);
+                    localStorage.setItem("planner-divider", currentPercentage);
                 }
             }
             dragger.addEventListener("mousedown", e => {
