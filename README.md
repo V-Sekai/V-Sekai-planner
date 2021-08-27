@@ -1,4 +1,7 @@
-# Deciduous
-A web app that simplifies building attack decision trees as described in the Security Chaos Engineering report. Hosted at https://www.deciduous.app/
+# Planner
 
-How to / getting started guide: https://swagitda.com/blog/posts/deciduous-attack-tree-app/
+A web app that simplifies building decision tree plans. Hosted at https://fire.github.io/V-Sekai-planner/
+
+## References
+
+See alternative getting started guide: https://swagitda.com/blog/posts/deciduous-attack-tree-app/
