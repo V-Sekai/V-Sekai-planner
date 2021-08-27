@@ -1,6 +1,6 @@
 # Planner
 
-A web app that simplifies building decision tree plans. Hosted at https://fire.github.io/V-Sekai-planner/
+A web app that simplifies building decision tree plans. Hosted at https://v-sekai.github.io/V-Sekai-planner/
 
 ## References
 
