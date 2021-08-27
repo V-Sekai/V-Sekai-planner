@@ -81,7 +81,6 @@
             outline: 0;
             border-right: 1px solid silver;
             z-index: 1;
-            color: transparent;
             background: transparent;
             caret-color: black;
         }
@@ -258,7 +257,7 @@ goals:
 filter:
  - cassie_in_godot_4
 </textarea>
-        <pre id="highlighting" aria-hidden="true"><code id="inputHighlighted"></code></pre>
+        <pre id="highlighting" aria-hidden="true"></pre>
     </div>
     <div class="contentArea" id="rightPane">
         <div class="right-header">
@@ -448,13 +447,13 @@ digraph {
                 ...nodes("fact", facts, {
                     fillcolor: theme["fact-fill"],
                 }),
-                `// approaches`,
-                ...nodes("approach", approaches, {
-                    fillcolor: theme["approach-fill"],
-                }),
                 `// problems`,
                 ...nodes("problem", problems, {
                     fillcolor: theme["problem-fill"],
+                }),
+                `// approaches`,
+                ...nodes("approach", approaches, {
+                    fillcolor: theme["approach-fill"],
                 }),
                 `// goals`,
                 ...nodes("goal", goals, {
@@ -546,7 +545,6 @@ digraph {
         const inputSource = document.getElementById("inputSource");
         const downloadLink = document.getElementById("downloadLink");
         const downloadSvgLink = document.getElementById("downloadSvgLink");
-        const inputHighlighted = document.getElementById("inputHighlighted");
         const highlighting = document.getElementById("highlighting");
         function syncScroll() {
             highlighting.scrollTop = inputSource.scrollTop;
@@ -571,68 +569,6 @@ digraph {
                         types["goals"] = "goals";
                         types["facts"] = "facts";
                         types["reality"] = "facts";
-                        let current = "";
-                        let i = 0;
-                        const childNodes = inputHighlighted.childNodes;
-                        function insertTextNode(text) {
-                            if (i < childNodes.length) {
-                                const node = childNodes[i];
-                                if (node.nodeType === Node.TEXT_NODE) {
-                                    if (node.textContent !== text) {
-                                        node.textContent = text;
-                                    }
-                                } else {
-                                    inputHighlighted.replaceChild(document.createTextNode(text), node);
-                                }
-                            } else {
-                                inputHighlighted.appendChild(document.createTextNode(text));
-                            }
-                            i++;
-                        }
-                        function insertSpan(text, className) {
-                            if (i < childNodes.length) {
-                                const node = childNodes[i];
-                                if (node.nodeType === Node.ELEMENT_NODE) {
-                                    if (node.textContent !== text) {
-                                        node.textContent = text;
-                                    }
-                                    if (node.className !== className) {
-                                        node.className = className
-                                    }
-                                } else {
-                                    const span = document.createElement("span");
-                                    span.className = className;
-                                    span.textContent = text;
-                                    inputHighlighted.replaceChild(span, node);
-                                }
-                            } else {
-                                const span = document.createElement("span");
-                                span.className = className;
-                                span.textContent = text;
-                                inputHighlighted.appendChild(span);
-                            }
-                            i++;
-                        }
-                        for (const token of (newInput[newInput.length - 1] == "\n" ? newInput + " " : newInput).split(/\b/)) {
-                            if (Object.hasOwnProperty.call(types, token)) {
-                                insertTextNode(current);
-                                current = "";
-                                insertSpan(token, types[token]);
-                            } else {
-                                current += token;
-                            }
-                        }
-                        insertTextNode(current);
-                        while (i < childNodes.length) {
-                            inputHighlighted.removeChild(childNodes[i]);
-                        }
-                        // Resync line height
-                        const highlightedHeight = inputHighlighted.getBoundingClientRect().height;
-                        const inputHeight = inputSource.scrollHeight;
-                        if (highlightedHeight > inputHeight) {
-                            // line height hack for Firefox+Windows
-                            inputSource.style.lineHeight = highlightedHeight * 20.01 / (inputHeight - 40) + "px";
-                        }
                     }
                     try {
                         let dot, title;
